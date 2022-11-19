@@ -3,7 +3,10 @@ name: CI/CD Workflow w/ Dagger
 on: 
   push:
     branches:
-      - main
+    - dagger
+    paths:
+    - src
+    - package.json
 
 
 jobs:
