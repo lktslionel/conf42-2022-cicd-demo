@@ -1,0 +1,21 @@
+name: CI/CD Workflow w/ Dagger
+
+on: 
+  push:
+    branches:
+      - main
+
+
+jobs:
+  pipeline:
+    name: CI CD Pipeline
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      
+    - uses: ./.github/actions/prepare
+      with:
+        github-python-sdk: true
+
+    - name: Run pipeline
+      run: python tasks/cicd.py

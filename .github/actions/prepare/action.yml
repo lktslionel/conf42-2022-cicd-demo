@@ -1,0 +1,37 @@
+name: 'Prepare CI'
+description: 'Setup Dagger and CI requirements'
+inputs:
+  github-python-sdk:  # id of input
+    description: 'Install PyGitHub to interact with GitHub using Python'
+    default: 'false'
+  dagger-sdk:  # id of input
+    description: 'Install Dagger SDK'
+    default: 'false'
+
+outputs:
+  package-url:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
+runs:
+  using: "composite"
+  steps:
+  - uses: actions/setup-node@v3
+    if: ${{ inputs.dagger-sdk == 'false' }}
+    with:
+      node-version: 16
+
+  - uses: actions/setup-python@v4
+    if: ${{ inputs.dagger-sdk == 'true' }}
+    with:
+      python-version: '3.10'
+
+  - name: Install Dagger Python SDK and utils
+    if: ${{ inputs.dagger-sdk == 'true' }}
+    run: |
+      pip install dagger-io
+      pip install shlex
+
+  - name: Install PyGitHub
+    if: ${{ inputs.github-python-sdk == 'true' }}
+    run: |
+      pip install PyGithub
