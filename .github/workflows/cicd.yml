@@ -27,6 +27,14 @@ jobs:
       run: |
         echo '//npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}' >> ~/.npmrc
 
+    - name: Config Git and NPM
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+        npm config set user github-actions
+        npm config set email github-actions@github.com
+
     - name: Bump version
       run: |
         npm version prerelease --preid=rc

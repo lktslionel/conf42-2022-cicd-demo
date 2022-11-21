@@ -25,4 +25,5 @@ jobs:
     - name: Run pipeline
       env:
         GIT_TOKEN: ${{ github.token }}
+        PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
       run: python tasks/cicd.py
