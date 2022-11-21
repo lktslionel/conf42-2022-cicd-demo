@@ -53,7 +53,7 @@ jobs:
 
     - name: Publish package
       run: |
-        npm publish --tag preview
+        npm publish
 
     - name: Export package version as env
       run: |
