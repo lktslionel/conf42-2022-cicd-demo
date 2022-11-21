@@ -1,19 +1,26 @@
 {
   "name": "@lktslionel/conf42-demo",
-  "version": "1.0.0",
+  "version": "1.1.0-rc.0",
   "description": "Demo for my talk at Conf42 about universal CI/CD pipeline",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./tasks/build.sh",
+    "test": "./tasks/test.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lktslionel/conf42-2022-cicd-demo.git"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "author": "lktslionel",
+  "email": "lktslionel@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lktslionel/conf42-2022-cicd-demo/issues"
   },
-  "homepage": "https://github.com/lktslionel/conf42-2022-cicd-demo#readme"
+  "homepage": "https://github.com/lktslionel/conf42-2022-cicd-demo#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
 }
