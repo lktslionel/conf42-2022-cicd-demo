@@ -19,6 +19,7 @@ runs:
 
   - name: Get required python version
     if: ${{ inputs.dagger-sdk == 'true' }}
+    shell: bash
     run: |
       [[ ! -f ./.python-version ]]\
           && echo "You must pinned the python version in file[.python-version]."\
@@ -34,5 +35,6 @@ runs:
 
   - name: Install Dagger Python SDK and other PIP packages
     if: ${{ inputs.dagger-sdk == 'true' }}
+    shell: bash
     run: |
       pip install pip install -r requirements.txt
