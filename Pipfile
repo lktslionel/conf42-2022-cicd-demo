@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 dagger-io = "*"
+anyio = "*"
 
 [dev-packages]
 
