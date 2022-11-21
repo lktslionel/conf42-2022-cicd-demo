@@ -1,9 +1,6 @@
 name: 'Prepare CI'
 description: 'Setup Dagger and CI requirements'
 inputs:
-  github-python-sdk:  # id of input
-    description: 'Install PyGitHub to interact with GitHub using Python'
-    default: 'false'
   dagger-sdk:  # id of input
     description: 'Install Dagger SDK'
     default: 'false'
@@ -20,18 +17,22 @@ runs:
     with:
       node-version: 16
 
+  - name: Get required python version
+    if: ${{ inputs.dagger-sdk == 'true' }}
+    run: |
+      [[ ! -f ./.python-version ]]\
+          && echo "You must pinned the python version in file[.python-version]."\
+          && exit 1
+
+      echo "REQUIRED_PYTHON_VERSION=$(cat ./.python-version)" >> $GITHUB_ENV
+
   - uses: actions/setup-python@v4
     if: ${{ inputs.dagger-sdk == 'true' }}
     with:
-      python-version: '3.10'
+      python-version: '${{ env.REQUIRED_PYTHON_VERSION }}'
+      cache: 'pip'
 
-  - name: Install Dagger Python SDK and utils
+  - name: Install Dagger Python SDK and other PIP packages
     if: ${{ inputs.dagger-sdk == 'true' }}
     run: |
-      pip install dagger-io
-      pip install shlex
-
-  - name: Install PyGitHub
-    if: ${{ inputs.github-python-sdk == 'true' }}
-    run: |
-      pip install PyGithub
+      pip install pip install -r requirements.txt

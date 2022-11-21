@@ -9,9 +9,50 @@ on:
     - package.json
 
 jobs:
-  :
+  pipeline:
+    name: CI CD Pipeline
     runs-on: 
 
     steps:
-      - name: 
-        run: 
+    - uses: actions/checkout@v3
+
+    - name: Prepare CI env
+      uses: ./.github/actions/prepare
+
+    - name: Login to GitHub Packages NPM Registry
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        echo '//npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}' >> ~/.npmrc
+
+    - name: Bump version
+      run: |
+        npm version prerelease --preid=rc
+
+    - name: Install deps
+      run: |
+        npm ci
+
+    - name: Run build
+      run: |
+        npm run build
+
+    - name: Run tests
+      run: |
+        npm run test
+
+    - name: Publish package
+      run: |
+        npm publish
+
+    - name: Export package version as env
+      run: |
+        pkg_name="$(jq -r '.name' package.json)"
+        pkg_version="$(npm version --json | jq -r --arg pkg "${pkg_name}" '.[$pkg]')"
+
+        echo "PKG_VERSION=${pkg_version}" >> $GITHUB_ENV
+
+    - name: Commit changes
+      run: |
+        git push origin ${{ github.ref_name }}
+        git push origin v${{ env.PKG_VERSION }}

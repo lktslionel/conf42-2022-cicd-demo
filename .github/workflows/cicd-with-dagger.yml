@@ -18,7 +18,9 @@ jobs:
       
     - uses: ./.github/actions/prepare
       with:
-        github-python-sdk: true
+        dagger-sdk: true
 
     - name: Run pipeline
+      env:
+        GIT_TOKEN: ${{ github.token }}
       run: python tasks/cicd.py
