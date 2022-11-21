@@ -27,4 +27,5 @@ jobs:
       env:
         GIT_TOKEN: ${{ github.token }}
         PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
+        PACKAGE_NAME: '@lktslionel/conf42-demo'
       run: python tasks/cicd.py
