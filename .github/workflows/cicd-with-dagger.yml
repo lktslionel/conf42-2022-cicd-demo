@@ -13,6 +13,7 @@ on:
 
 jobs:
   pipeline:
+    if: ${{ github.ref_name == 'dagger' }}
     name: CI CD Pipeline
     runs-on: ubuntu-latest
     steps:
