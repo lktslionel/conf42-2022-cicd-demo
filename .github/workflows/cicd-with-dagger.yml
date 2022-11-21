@@ -1,6 +1,8 @@
 name: CI/CD Workflow w/ Dagger
 
 on: 
+  workflow_dispatch:
+
   push:
     branches:
     - dagger
