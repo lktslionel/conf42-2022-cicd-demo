@@ -7,7 +7,7 @@ echo -e "Publish ..."
 
 npm publish
 
-git push ${GIT_BRANCH}
+git push
 git push --tags
 
 echo -e "Done.\n"
