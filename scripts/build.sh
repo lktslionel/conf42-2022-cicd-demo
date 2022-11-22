@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 
-echo -e "Building ..."
+echo -e "Building package[$PACKAGE_NAME]..."
 
 sleep $((1 + $RANDOM % 3))
 

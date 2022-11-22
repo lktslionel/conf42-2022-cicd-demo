@@ -10,6 +10,9 @@ on:
     - src
     - package.json
 
+env:
+  PACKAGE_NAME: '@lktslionel/conf42-demo'
+
 
 jobs:
   pipeline:
@@ -23,9 +26,14 @@ jobs:
       with:
         dagger-sdk: true
 
+    - name: Login to GitHub Packages NPM Registry
+      env:
+        PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
+      run: |
+        ./scripts/prepare.sh
+
     - name: Run pipeline
       env:
         GIT_TOKEN: ${{ github.token }}
         PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
-        PACKAGE_NAME: '@lktslionel/conf42-demo'
       run: python tasks/cicd.py
