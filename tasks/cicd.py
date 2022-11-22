@@ -17,7 +17,10 @@ async def pipeline():
             .from_("node:18.12.1")
             .with_mounted_directory("/workspace", src_id)
             .with_workdir("/workspace")
-            .with_env_variable("PACKAGE_REGISTRY_TOKEN", "toto")
+            .with_env_variable(
+                "PACKAGE_REGISTRY_TOKEN", os.getenv("PACKAGE_REGISTRY_TOKEN")
+            )
+            .with_env_variable("GIT_BRANCH", os.getenv("GIT_BRANCH"))
             .with_env_variable("PACKAGE_NAME", os.getenv("PACKAGE_NAME"))
             .with_entrypoint("bash")
             .exec(sh('-c "./scripts/prepare.sh"'))
@@ -25,6 +28,7 @@ async def pipeline():
             .exec(sh('-c "npm version prerelease --preid=rc"'))
             .exec(sh('-c "npm run build"'))
             .exec(sh('-c "npm test"'))
+            .exec(sh('-c "npm publish"'))
         )
 
         contents = await container.stdout().contents()

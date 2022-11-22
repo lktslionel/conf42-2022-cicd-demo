@@ -34,6 +34,6 @@ jobs:
 
     - name: Run pipeline
       env:
-        GIT_TOKEN: ${{ github.token }}
         PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
+        GIT_BRANCH: ${{ github.ref_name }}
       run: python tasks/cicd.py
