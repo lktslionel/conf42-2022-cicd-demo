@@ -1,6 +1,6 @@
 {
   "name": "@lktslionel/conf42-demo",
-  "version": "1.1.0-rc.6",
+  "version": "1.1.0-rc.7",
   "description": "Demo for my talk at Conf42 about universal CI/CD pipeline",
   "scripts": {
     "build": "./scripts/build.sh",
