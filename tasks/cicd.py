@@ -20,7 +20,6 @@ async def pipeline():
             .with_env_variable(
                 "PACKAGE_REGISTRY_TOKEN", os.getenv("PACKAGE_REGISTRY_TOKEN")
             )
-            .with_env_variable("GIT_BRANCH", os.getenv("GIT_BRANCH"))
             .with_env_variable("PACKAGE_NAME", os.getenv("PACKAGE_NAME"))
             .with_entrypoint("bash")
             .exec(sh('-c "./scripts/prepare.sh"'))

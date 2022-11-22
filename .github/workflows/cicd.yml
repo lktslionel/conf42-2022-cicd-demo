@@ -54,7 +54,5 @@ jobs:
         npm run test
 
     - name: Publish package
-      env:
-        GIT_BRANCH: ${{ github.ref_name }}
       run: |
         ./scripts/publish.sh

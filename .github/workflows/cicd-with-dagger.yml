@@ -3,20 +3,12 @@ name: CI/CD Workflow w/ Dagger
 on: 
   workflow_dispatch:
 
-  push:
-    branches:
-    - dagger
-    paths:
-    - src
-    - package.json
-
 env:
   PACKAGE_NAME: '@lktslionel/conf42-demo'
 
 
 jobs:
   pipeline:
-    if: ${{ github.ref_name == 'dagger' }}
     name: CI CD Pipeline
     runs-on: ubuntu-latest
     steps:
@@ -29,5 +21,4 @@ jobs:
     - name: Run pipeline
       env:
         PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
-        GIT_BRANCH: ${{ github.ref_name }}
       run: python tasks/cicd.py
