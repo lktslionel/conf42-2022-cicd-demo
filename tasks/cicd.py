@@ -27,7 +27,7 @@ async def pipeline():
             .exec(sh('-c "npm version prerelease --preid=rc"'))
             .exec(sh('-c "npm run build"'))
             .exec(sh('-c "npm test"'))
-            .exec(sh('-c "npm publish"'))
+            .exec(sh('-c "./scripts/publish.sh"'))
         )
 
         contents = await container.stdout().contents()
