@@ -23,17 +23,9 @@ jobs:
 
     - name: Login to GitHub Packages NPM Registry
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
       run: |
-        echo '//npm.pkg.github.com/:_authToken=${{ env.GITHUB_TOKEN }}' >> ~/.npmrc
-
-    - name: Config Git and NPM
-      run: |
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-
-        npm config set user github-actions
-        npm config set email github-actions@github.com
+        ./scripts/prepare.sh
 
     - name: Bump version
       run: |
