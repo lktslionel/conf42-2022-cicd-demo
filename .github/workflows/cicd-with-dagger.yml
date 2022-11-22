@@ -26,12 +26,6 @@ jobs:
       with:
         dagger-sdk: true
 
-    - name: Login to GitHub Packages NPM Registry
-      env:
-        PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
-      run: |
-        ./scripts/prepare.sh
-
     - name: Run pipeline
       env:
         PACKAGE_REGISTRY_TOKEN: ${{ github.token }}
