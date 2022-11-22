@@ -27,13 +27,13 @@ jobs:
       run: |
         ./scripts/prepare.sh
 
-    - name: Bump version
-      run: |
-        npm version prerelease --preid=rc
-
     - name: Install deps
       run: |
         npm ci
+
+    - name: Bump version
+      run: |
+        npm version prerelease --preid=rc
 
     - name: Run build
       run: |
