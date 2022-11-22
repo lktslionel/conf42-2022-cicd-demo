@@ -12,23 +12,25 @@ async def pipeline():
 
         src_id = await client.host().workdir().id()
 
-        node_container = (
+        container = (
             client.container()
-            .from_("cgr.dev/chainguard/node:18.12.1")
+            .from_("node:18.12.1")
             .with_mounted_directory("/workspace", src_id)
             .with_workdir("/workspace")
-            .with_env_variable("PACKAGE_NAME", os.getenv("PACKAGE_NAME"))
-            .exec(sh('npm ci'))
-            .exec(sh('npm version prerelease --preid=rc'))
-            .exec(sh('npm run build'))
-            .exec(sh('npm run test'))
+            # .with_env_variable("PACKAGE_NAME", os.getenv("PACKAGE_NAME"))
+            .with_entrypoint("bash")
+            .exec(sh('-c "npm ci"'))
+            .exec(sh('-c "npm version prerelease --preid=rc"'))
+            .exec(sh('-c "npm run build"'))
+            .exec(sh('-c "npm test"'))
         )
 
-        print(f"Starting pipeline ...")
+        contents = await container.stdout().contents()
 
-        await node_container.exit_code()
+        print(contents)
 
         print(f"Done.")
+
 
 if __name__ == "__main__":
     anyio.run(pipeline)
