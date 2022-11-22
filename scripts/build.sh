@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+set -eu 
+
 
 echo -e "Building package[$PACKAGE_NAME]..."
 

@@ -1,9 +1,10 @@
 #!/bin/bash 
 
+set -eu 
 
 echo -e "Preparing ..."
 
-: "${PACKAGE_REGISTRY_TOKEN:Env var[PACKAGE_REGISTRY_TOKEN] is required.}"
+: "${PACKAGE_REGISTRY_TOKEN:?Env var[PACKAGE_REGISTRY_TOKEN] is required.}"
 
 echo '//npm.pkg.github.com/:_authToken=${PACKAGE_REGISTRY_TOKEN}' >> ~/.npmrc
 
