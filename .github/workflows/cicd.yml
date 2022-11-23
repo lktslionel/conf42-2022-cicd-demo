@@ -1,14 +1,7 @@
 name: CI/CD Workflow
 
 on: 
-  workflow_dispatch:
-    
-  push:
-    branches:
-    - main
-    paths:
-    - src
-    - package.json
+  workflow_dispatch:   
 
 env:
   PACKAGE_NAME: '@lktslionel/conf42-demo'

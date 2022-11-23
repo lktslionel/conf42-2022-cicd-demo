@@ -6,7 +6,6 @@ on:
 env:
   PACKAGE_NAME: '@lktslionel/conf42-demo'
 
-
 jobs:
   pipeline:
     name: CI CD Pipeline
