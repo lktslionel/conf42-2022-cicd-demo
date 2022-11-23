@@ -13,7 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       
-    - uses: ./.github/actions/prepare
+    - name: Prepare CI env
+      uses: ./.github/actions/prepare
       with:
         dagger-sdk: true
 
